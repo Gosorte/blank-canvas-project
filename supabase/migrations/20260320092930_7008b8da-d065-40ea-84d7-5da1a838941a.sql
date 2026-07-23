@@ -1,0 +1,1 @@
+ALTER TABLE public.profiles ADD COLUMN tenant_id uuid REFERENCES public.tenants(id) ON DELETE SET NULL DEFAULT NULL;
