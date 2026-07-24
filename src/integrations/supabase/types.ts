@@ -247,6 +247,47 @@ export type Database = {
           },
         ]
       }
+      crm_ai_config: {
+        Row: {
+          analise_notas: Json | null
+          created_at: string
+          id: string
+          prompt_classificacao: string | null
+          saudacao: string | null
+          survey_emojis: Json | null
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          analise_notas?: Json | null
+          created_at?: string
+          id?: string
+          prompt_classificacao?: string | null
+          saudacao?: string | null
+          survey_emojis?: Json | null
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          analise_notas?: Json | null
+          created_at?: string
+          id?: string
+          prompt_classificacao?: string | null
+          saudacao?: string | null
+          survey_emojis?: Json | null
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_ai_config_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: true
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       crm_arquivos: {
         Row: {
           aprovado: boolean
@@ -346,6 +387,142 @@ export type Database = {
           },
         ]
       }
+      crm_contatos: {
+        Row: {
+          cliente_id: string | null
+          created_at: string
+          email: string | null
+          foto_url: string | null
+          id: string
+          nome: string | null
+          numero: string
+          observacoes: string | null
+          tags: string[] | null
+          tenant_id: string
+          total_conversas: number
+          ultima_conversa_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          cliente_id?: string | null
+          created_at?: string
+          email?: string | null
+          foto_url?: string | null
+          id?: string
+          nome?: string | null
+          numero: string
+          observacoes?: string | null
+          tags?: string[] | null
+          tenant_id: string
+          total_conversas?: number
+          ultima_conversa_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          cliente_id?: string | null
+          created_at?: string
+          email?: string | null
+          foto_url?: string | null
+          id?: string
+          nome?: string | null
+          numero?: string
+          observacoes?: string | null
+          tags?: string[] | null
+          tenant_id?: string
+          total_conversas?: number
+          ultima_conversa_at?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_contatos_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_contatos_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_conversas: {
+        Row: {
+          atendente_id: string | null
+          contato_id: string | null
+          created_at: string
+          foto_contato: string | null
+          id: string
+          nome_contato: string | null
+          numero_contato: string | null
+          setor_id: string | null
+          status: string
+          tenant_id: string
+          ultima_mensagem: string | null
+          ultima_mensagem_at: string | null
+          updated_at: string
+          whatsapp_id: string | null
+        }
+        Insert: {
+          atendente_id?: string | null
+          contato_id?: string | null
+          created_at?: string
+          foto_contato?: string | null
+          id?: string
+          nome_contato?: string | null
+          numero_contato?: string | null
+          setor_id?: string | null
+          status?: string
+          tenant_id: string
+          ultima_mensagem?: string | null
+          ultima_mensagem_at?: string | null
+          updated_at?: string
+          whatsapp_id?: string | null
+        }
+        Update: {
+          atendente_id?: string | null
+          contato_id?: string | null
+          created_at?: string
+          foto_contato?: string | null
+          id?: string
+          nome_contato?: string | null
+          numero_contato?: string | null
+          setor_id?: string | null
+          status?: string
+          tenant_id?: string
+          ultima_mensagem?: string | null
+          ultima_mensagem_at?: string | null
+          updated_at?: string
+          whatsapp_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_conversas_contato_id_fkey"
+            columns: ["contato_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contatos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_conversas_setor_id_fkey"
+            columns: ["setor_id"]
+            isOneToOne: false
+            referencedRelation: "crm_setores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_conversas_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       crm_leads: {
         Row: {
           cliente_id: string | null
@@ -414,6 +591,365 @@ export type Database = {
           },
           {
             foreignKeyName: "crm_leads_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_mensagem_templates: {
+        Row: {
+          atalho: string | null
+          ativo: boolean
+          categoria: string
+          conteudo: string
+          created_at: string
+          id: string
+          nome: string
+          tenant_id: string
+          updated_at: string
+          uso_count: number
+          variaveis: string[] | null
+        }
+        Insert: {
+          atalho?: string | null
+          ativo?: boolean
+          categoria?: string
+          conteudo: string
+          created_at?: string
+          id?: string
+          nome: string
+          tenant_id: string
+          updated_at?: string
+          uso_count?: number
+          variaveis?: string[] | null
+        }
+        Update: {
+          atalho?: string | null
+          ativo?: boolean
+          categoria?: string
+          conteudo?: string
+          created_at?: string
+          id?: string
+          nome?: string
+          tenant_id?: string
+          updated_at?: string
+          uso_count?: number
+          variaveis?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_mensagem_templates_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_mensagens: {
+        Row: {
+          conteudo: string
+          conversa_id: string
+          created_at: string
+          direcao: string
+          enviado_por: string | null
+          id: string
+          lido: boolean
+          tenant_id: string
+          tipo: string
+          whatsapp_msg_id: string | null
+        }
+        Insert: {
+          conteudo: string
+          conversa_id: string
+          created_at?: string
+          direcao?: string
+          enviado_por?: string | null
+          id?: string
+          lido?: boolean
+          tenant_id: string
+          tipo?: string
+          whatsapp_msg_id?: string | null
+        }
+        Update: {
+          conteudo?: string
+          conversa_id?: string
+          created_at?: string
+          direcao?: string
+          enviado_por?: string | null
+          id?: string
+          lido?: boolean
+          tenant_id?: string
+          tipo?: string
+          whatsapp_msg_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_mensagens_conversa_id_fkey"
+            columns: ["conversa_id"]
+            isOneToOne: false
+            referencedRelation: "crm_conversas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_mensagens_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_orcamento_itens: {
+        Row: {
+          created_at: string
+          descricao: string
+          id: string
+          orcamento_id: string
+          ordem: number
+          preco_unitario: number
+          produto_id: string | null
+          quantidade: number
+          subtotal: number
+          unidade: string
+        }
+        Insert: {
+          created_at?: string
+          descricao: string
+          id?: string
+          orcamento_id: string
+          ordem?: number
+          preco_unitario?: number
+          produto_id?: string | null
+          quantidade?: number
+          subtotal?: number
+          unidade?: string
+        }
+        Update: {
+          created_at?: string
+          descricao?: string
+          id?: string
+          orcamento_id?: string
+          ordem?: number
+          preco_unitario?: number
+          produto_id?: string | null
+          quantidade?: number
+          subtotal?: number
+          unidade?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_orcamento_itens_orcamento_id_fkey"
+            columns: ["orcamento_id"]
+            isOneToOne: false
+            referencedRelation: "crm_orcamentos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_orcamento_itens_produto_id_fkey"
+            columns: ["produto_id"]
+            isOneToOne: false
+            referencedRelation: "produtos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_orcamentos: {
+        Row: {
+          cliente_id: string | null
+          condicoes: string | null
+          contato_id: string | null
+          conversa_id: string | null
+          created_at: string
+          criado_por: string | null
+          desconto_percentual: number
+          desconto_valor: number
+          id: string
+          numero: number
+          observacoes: string | null
+          prazo_entrega: string | null
+          status: string
+          subtotal: number
+          tenant_id: string
+          total: number
+          updated_at: string
+          validade_dias: number
+        }
+        Insert: {
+          cliente_id?: string | null
+          condicoes?: string | null
+          contato_id?: string | null
+          conversa_id?: string | null
+          created_at?: string
+          criado_por?: string | null
+          desconto_percentual?: number
+          desconto_valor?: number
+          id?: string
+          numero?: number
+          observacoes?: string | null
+          prazo_entrega?: string | null
+          status?: string
+          subtotal?: number
+          tenant_id: string
+          total?: number
+          updated_at?: string
+          validade_dias?: number
+        }
+        Update: {
+          cliente_id?: string | null
+          condicoes?: string | null
+          contato_id?: string | null
+          conversa_id?: string | null
+          created_at?: string
+          criado_por?: string | null
+          desconto_percentual?: number
+          desconto_valor?: number
+          id?: string
+          numero?: number
+          observacoes?: string | null
+          prazo_entrega?: string | null
+          status?: string
+          subtotal?: number
+          tenant_id?: string
+          total?: number
+          updated_at?: string
+          validade_dias?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_orcamentos_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_orcamentos_contato_id_fkey"
+            columns: ["contato_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contatos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_orcamentos_conversa_id_fkey"
+            columns: ["conversa_id"]
+            isOneToOne: false
+            referencedRelation: "crm_conversas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_orcamentos_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_setores: {
+        Row: {
+          ativo: boolean
+          cor: string
+          created_at: string
+          descricao: string | null
+          id: string
+          nome: string
+          ordem: number
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          ativo?: boolean
+          cor?: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome: string
+          ordem?: number
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          ativo?: boolean
+          cor?: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome?: string
+          ordem?: number
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_setores_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_transferencias: {
+        Row: {
+          atendente_destino_id: string | null
+          atendente_origem_id: string | null
+          conversa_id: string
+          created_at: string
+          id: string
+          motivo: string | null
+          setor_destino_id: string | null
+          setor_origem_id: string | null
+          tenant_id: string
+        }
+        Insert: {
+          atendente_destino_id?: string | null
+          atendente_origem_id?: string | null
+          conversa_id: string
+          created_at?: string
+          id?: string
+          motivo?: string | null
+          setor_destino_id?: string | null
+          setor_origem_id?: string | null
+          tenant_id: string
+        }
+        Update: {
+          atendente_destino_id?: string | null
+          atendente_origem_id?: string | null
+          conversa_id?: string
+          created_at?: string
+          id?: string
+          motivo?: string | null
+          setor_destino_id?: string | null
+          setor_origem_id?: string | null
+          tenant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_transferencias_conversa_id_fkey"
+            columns: ["conversa_id"]
+            isOneToOne: false
+            referencedRelation: "crm_conversas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_transferencias_setor_destino_id_fkey"
+            columns: ["setor_destino_id"]
+            isOneToOne: false
+            referencedRelation: "crm_setores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_transferencias_setor_origem_id_fkey"
+            columns: ["setor_origem_id"]
+            isOneToOne: false
+            referencedRelation: "crm_setores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_transferencias_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
@@ -762,6 +1298,65 @@ export type Database = {
           },
         ]
       }
+      maquinas: {
+        Row: {
+          ativa: boolean
+          capacidade: string | null
+          created_at: string
+          custo_hora: number
+          id: string
+          localizacao: string | null
+          marca: string | null
+          modelo: string | null
+          nome: string
+          observacoes: string | null
+          status: string
+          tenant_id: string
+          tipo_modulo: string
+          updated_at: string
+        }
+        Insert: {
+          ativa?: boolean
+          capacidade?: string | null
+          created_at?: string
+          custo_hora?: number
+          id?: string
+          localizacao?: string | null
+          marca?: string | null
+          modelo?: string | null
+          nome: string
+          observacoes?: string | null
+          status?: string
+          tenant_id: string
+          tipo_modulo: string
+          updated_at?: string
+        }
+        Update: {
+          ativa?: boolean
+          capacidade?: string | null
+          created_at?: string
+          custo_hora?: number
+          id?: string
+          localizacao?: string | null
+          marca?: string | null
+          modelo?: string | null
+          nome?: string
+          observacoes?: string | null
+          status?: string
+          tenant_id?: string
+          tipo_modulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "maquinas_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       module_config: {
         Row: {
           has_crm_advanced: boolean
@@ -995,6 +1590,69 @@ export type Database = {
           valor?: number
         }
         Relationships: []
+      }
+      processos_producao: {
+        Row: {
+          ativo: boolean
+          created_at: string
+          custo_processo: number
+          descricao: string | null
+          id: string
+          maquina_id: string | null
+          nome: string
+          ordem: number
+          requer_maquina: boolean
+          tempo_estimado_min: number | null
+          tenant_id: string
+          tipo_modulo: string
+          updated_at: string
+        }
+        Insert: {
+          ativo?: boolean
+          created_at?: string
+          custo_processo?: number
+          descricao?: string | null
+          id?: string
+          maquina_id?: string | null
+          nome: string
+          ordem?: number
+          requer_maquina?: boolean
+          tempo_estimado_min?: number | null
+          tenant_id: string
+          tipo_modulo: string
+          updated_at?: string
+        }
+        Update: {
+          ativo?: boolean
+          created_at?: string
+          custo_processo?: number
+          descricao?: string | null
+          id?: string
+          maquina_id?: string | null
+          nome?: string
+          ordem?: number
+          requer_maquina?: boolean
+          tempo_estimado_min?: number | null
+          tenant_id?: string
+          tipo_modulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "processos_producao_maquina_id_fkey"
+            columns: ["maquina_id"]
+            isOneToOne: false
+            referencedRelation: "maquinas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "processos_producao_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       produtos: {
         Row: {
