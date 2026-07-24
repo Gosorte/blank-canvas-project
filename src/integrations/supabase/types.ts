@@ -55,6 +55,71 @@ export type Database = {
           },
         ]
       }
+      calendar_events: {
+        Row: {
+          categoria: string
+          concluido_em: string | null
+          cor: string | null
+          created_at: string
+          criado_por: string | null
+          data_evento: string
+          descricao: string | null
+          hora_fim: string | null
+          hora_inicio: string | null
+          id: string
+          local: string | null
+          prioridade: string
+          status: string
+          tenant_id: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          categoria?: string
+          concluido_em?: string | null
+          cor?: string | null
+          created_at?: string
+          criado_por?: string | null
+          data_evento: string
+          descricao?: string | null
+          hora_fim?: string | null
+          hora_inicio?: string | null
+          id?: string
+          local?: string | null
+          prioridade?: string
+          status?: string
+          tenant_id: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          categoria?: string
+          concluido_em?: string | null
+          cor?: string | null
+          created_at?: string
+          criado_por?: string | null
+          data_evento?: string
+          descricao?: string | null
+          hora_fim?: string | null
+          hora_inicio?: string | null
+          id?: string
+          local?: string | null
+          prioridade?: string
+          status?: string
+          tenant_id?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calendar_events_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       clientes: {
         Row: {
           ativo: boolean
@@ -380,6 +445,61 @@ export type Database = {
           },
           {
             foreignKeyName: "crm_atividades_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_avaliacoes: {
+        Row: {
+          atendente_id: string | null
+          comentario: string | null
+          contato_id: string | null
+          conversa_id: string
+          created_at: string
+          id: string
+          nota: number
+          tenant_id: string
+        }
+        Insert: {
+          atendente_id?: string | null
+          comentario?: string | null
+          contato_id?: string | null
+          conversa_id: string
+          created_at?: string
+          id?: string
+          nota: number
+          tenant_id: string
+        }
+        Update: {
+          atendente_id?: string | null
+          comentario?: string | null
+          contato_id?: string | null
+          conversa_id?: string
+          created_at?: string
+          id?: string
+          nota?: number
+          tenant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_avaliacoes_contato_id_fkey"
+            columns: ["contato_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contatos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_avaliacoes_conversa_id_fkey"
+            columns: ["conversa_id"]
+            isOneToOne: false
+            referencedRelation: "crm_conversas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_avaliacoes_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
@@ -950,6 +1070,380 @@ export type Database = {
           },
           {
             foreignKeyName: "crm_transferencias_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      customer_credits: {
+        Row: {
+          cliente_id: string
+          created_at: string
+          desconto_max_percentual: number
+          id: string
+          saldo_cashback: number
+          tenant_id: string
+          total_creditos_usados: number
+          updated_at: string
+        }
+        Insert: {
+          cliente_id: string
+          created_at?: string
+          desconto_max_percentual?: number
+          id?: string
+          saldo_cashback?: number
+          tenant_id: string
+          total_creditos_usados?: number
+          updated_at?: string
+        }
+        Update: {
+          cliente_id?: string
+          created_at?: string
+          desconto_max_percentual?: number
+          id?: string
+          saldo_cashback?: number
+          tenant_id?: string
+          total_creditos_usados?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "customer_credits_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "customer_credits_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discount_authorizations: {
+        Row: {
+          autorizado_por: string | null
+          cliente_id: string | null
+          codigo: string
+          created_at: string
+          desconto_percentual: number | null
+          expira_em: string
+          id: string
+          status: string
+          tenant_id: string
+          usado_em: string | null
+          usado_por: string | null
+          valor_desconto: number | null
+          valor_venda: number | null
+        }
+        Insert: {
+          autorizado_por?: string | null
+          cliente_id?: string | null
+          codigo: string
+          created_at?: string
+          desconto_percentual?: number | null
+          expira_em?: string
+          id?: string
+          status?: string
+          tenant_id: string
+          usado_em?: string | null
+          usado_por?: string | null
+          valor_desconto?: number | null
+          valor_venda?: number | null
+        }
+        Update: {
+          autorizado_por?: string | null
+          cliente_id?: string | null
+          codigo?: string
+          created_at?: string
+          desconto_percentual?: number | null
+          expira_em?: string
+          id?: string
+          status?: string
+          tenant_id?: string
+          usado_em?: string | null
+          usado_por?: string | null
+          valor_desconto?: number | null
+          valor_venda?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_authorizations_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_authorizations_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      erp_orcamento_itens: {
+        Row: {
+          categoria: string | null
+          created_at: string
+          descricao: string
+          especificacoes: Json | null
+          id: string
+          orcamento_id: string
+          ordem: number
+          preco_unitario: number
+          produto_id: string | null
+          produto_simples_id: string | null
+          quantidade: number
+          subtotal: number
+        }
+        Insert: {
+          categoria?: string | null
+          created_at?: string
+          descricao: string
+          especificacoes?: Json | null
+          id?: string
+          orcamento_id: string
+          ordem?: number
+          preco_unitario?: number
+          produto_id?: string | null
+          produto_simples_id?: string | null
+          quantidade?: number
+          subtotal?: number
+        }
+        Update: {
+          categoria?: string | null
+          created_at?: string
+          descricao?: string
+          especificacoes?: Json | null
+          id?: string
+          orcamento_id?: string
+          ordem?: number
+          preco_unitario?: number
+          produto_id?: string | null
+          produto_simples_id?: string | null
+          quantidade?: number
+          subtotal?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "erp_orcamento_itens_orcamento_id_fkey"
+            columns: ["orcamento_id"]
+            isOneToOne: false
+            referencedRelation: "erp_orcamentos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "erp_orcamento_itens_produto_id_fkey"
+            columns: ["produto_id"]
+            isOneToOne: false
+            referencedRelation: "produtos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "erp_orcamento_itens_produto_simples_id_fkey"
+            columns: ["produto_simples_id"]
+            isOneToOne: false
+            referencedRelation: "produtos_simples"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      erp_orcamentos: {
+        Row: {
+          categoria: string
+          cliente_id: string | null
+          cliente_nome: string
+          contato_email: string | null
+          contato_nome: string | null
+          contato_telefone: string | null
+          created_at: string
+          criado_por: string | null
+          data_entrega: string | null
+          forma_pagamento: string | null
+          hora_entrega: string | null
+          id: string
+          numero: number
+          observacoes: string | null
+          origem: string | null
+          parceiros: string | null
+          status: string
+          tenant_id: string
+          tipo_entrega: string | null
+          transportadora: string | null
+          updated_at: string
+          valor_total: number
+          vendedor: string | null
+        }
+        Insert: {
+          categoria?: string
+          cliente_id?: string | null
+          cliente_nome: string
+          contato_email?: string | null
+          contato_nome?: string | null
+          contato_telefone?: string | null
+          created_at?: string
+          criado_por?: string | null
+          data_entrega?: string | null
+          forma_pagamento?: string | null
+          hora_entrega?: string | null
+          id?: string
+          numero?: number
+          observacoes?: string | null
+          origem?: string | null
+          parceiros?: string | null
+          status?: string
+          tenant_id: string
+          tipo_entrega?: string | null
+          transportadora?: string | null
+          updated_at?: string
+          valor_total?: number
+          vendedor?: string | null
+        }
+        Update: {
+          categoria?: string
+          cliente_id?: string | null
+          cliente_nome?: string
+          contato_email?: string | null
+          contato_nome?: string | null
+          contato_telefone?: string | null
+          created_at?: string
+          criado_por?: string | null
+          data_entrega?: string | null
+          forma_pagamento?: string | null
+          hora_entrega?: string | null
+          id?: string
+          numero?: number
+          observacoes?: string | null
+          origem?: string | null
+          parceiros?: string | null
+          status?: string
+          tenant_id?: string
+          tipo_entrega?: string | null
+          transportadora?: string | null
+          updated_at?: string
+          valor_total?: number
+          vendedor?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "erp_orcamentos_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "erp_orcamentos_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      erp_pedidos: {
+        Row: {
+          categoria: string
+          cliente_id: string | null
+          cliente_nome: string
+          contato_email: string | null
+          contato_nome: string | null
+          contato_telefone: string | null
+          created_at: string
+          criado_por: string | null
+          data_entrega: string | null
+          forma_pagamento: string | null
+          hora_entrega: string | null
+          id: string
+          numero: number
+          observacoes: string | null
+          orcamento_id: string | null
+          origem: string | null
+          parceiros: string | null
+          status: string
+          tenant_id: string
+          tipo_entrega: string | null
+          transportadora: string | null
+          updated_at: string
+          valor_total: number
+          vendedor: string | null
+        }
+        Insert: {
+          categoria?: string
+          cliente_id?: string | null
+          cliente_nome: string
+          contato_email?: string | null
+          contato_nome?: string | null
+          contato_telefone?: string | null
+          created_at?: string
+          criado_por?: string | null
+          data_entrega?: string | null
+          forma_pagamento?: string | null
+          hora_entrega?: string | null
+          id?: string
+          numero?: number
+          observacoes?: string | null
+          orcamento_id?: string | null
+          origem?: string | null
+          parceiros?: string | null
+          status?: string
+          tenant_id: string
+          tipo_entrega?: string | null
+          transportadora?: string | null
+          updated_at?: string
+          valor_total?: number
+          vendedor?: string | null
+        }
+        Update: {
+          categoria?: string
+          cliente_id?: string | null
+          cliente_nome?: string
+          contato_email?: string | null
+          contato_nome?: string | null
+          contato_telefone?: string | null
+          created_at?: string
+          criado_por?: string | null
+          data_entrega?: string | null
+          forma_pagamento?: string | null
+          hora_entrega?: string | null
+          id?: string
+          numero?: number
+          observacoes?: string | null
+          orcamento_id?: string | null
+          origem?: string | null
+          parceiros?: string | null
+          status?: string
+          tenant_id?: string
+          tipo_entrega?: string | null
+          transportadora?: string | null
+          updated_at?: string
+          valor_total?: number
+          vendedor?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "erp_pedidos_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "erp_pedidos_orcamento_id_fkey"
+            columns: ["orcamento_id"]
+            isOneToOne: false
+            referencedRelation: "erp_orcamentos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "erp_pedidos_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
@@ -1654,6 +2148,41 @@ export type Database = {
           },
         ]
       }
+      product_groups: {
+        Row: {
+          ativo: boolean
+          created_at: string
+          descricao: string | null
+          id: string
+          nome: string
+          tenant_id: string
+        }
+        Insert: {
+          ativo?: boolean
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome: string
+          tenant_id: string
+        }
+        Update: {
+          ativo?: boolean
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome?: string
+          tenant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_groups_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       produtos: {
         Row: {
           area_minima_m2: number | null
@@ -1760,6 +2289,63 @@ export type Database = {
           },
         ]
       }
+      produtos_simples: {
+        Row: {
+          ativo: boolean
+          codigo: string
+          created_at: string
+          descricao: string | null
+          grupo_id: string | null
+          id: string
+          nome: string
+          observacoes: string | null
+          preco_unitario: number
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          ativo?: boolean
+          codigo: string
+          created_at?: string
+          descricao?: string | null
+          grupo_id?: string | null
+          id?: string
+          nome: string
+          observacoes?: string | null
+          preco_unitario?: number
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          ativo?: boolean
+          codigo?: string
+          created_at?: string
+          descricao?: string | null
+          grupo_id?: string | null
+          id?: string
+          nome?: string
+          observacoes?: string | null
+          preco_unitario?: number
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "produtos_simples_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "product_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "produtos_simples_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           aprovado: boolean
@@ -1791,6 +2377,107 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "profiles_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      smart_quotes: {
+        Row: {
+          categoria: string
+          cliente_nome: string | null
+          created_at: string
+          criado_por: string | null
+          custo_producao: number
+          cv_altura: number | null
+          cv_custo_acabamento: number | null
+          cv_custo_material_m2: number | null
+          cv_largura: number | null
+          digital_custo_clique: number | null
+          digital_custo_papel: number | null
+          digital_lados: number | null
+          digital_poses: number | null
+          digital_quantidade: number | null
+          digital_tipo_clique: string | null
+          id: string
+          lucro_liquido: number
+          markup_percentual: number
+          observacoes: string | null
+          offset_custo_ctp: number | null
+          offset_custo_hora: number | null
+          offset_custo_papel: number | null
+          offset_tempo_rodagem: number | null
+          offset_tempo_setup: number | null
+          offset_tiragem: number | null
+          preco_venda: number
+          status: string
+          tenant_id: string
+        }
+        Insert: {
+          categoria?: string
+          cliente_nome?: string | null
+          created_at?: string
+          criado_por?: string | null
+          custo_producao?: number
+          cv_altura?: number | null
+          cv_custo_acabamento?: number | null
+          cv_custo_material_m2?: number | null
+          cv_largura?: number | null
+          digital_custo_clique?: number | null
+          digital_custo_papel?: number | null
+          digital_lados?: number | null
+          digital_poses?: number | null
+          digital_quantidade?: number | null
+          digital_tipo_clique?: string | null
+          id?: string
+          lucro_liquido?: number
+          markup_percentual?: number
+          observacoes?: string | null
+          offset_custo_ctp?: number | null
+          offset_custo_hora?: number | null
+          offset_custo_papel?: number | null
+          offset_tempo_rodagem?: number | null
+          offset_tempo_setup?: number | null
+          offset_tiragem?: number | null
+          preco_venda?: number
+          status?: string
+          tenant_id: string
+        }
+        Update: {
+          categoria?: string
+          cliente_nome?: string | null
+          created_at?: string
+          criado_por?: string | null
+          custo_producao?: number
+          cv_altura?: number | null
+          cv_custo_acabamento?: number | null
+          cv_custo_material_m2?: number | null
+          cv_largura?: number | null
+          digital_custo_clique?: number | null
+          digital_custo_papel?: number | null
+          digital_lados?: number | null
+          digital_poses?: number | null
+          digital_quantidade?: number | null
+          digital_tipo_clique?: string | null
+          id?: string
+          lucro_liquido?: number
+          markup_percentual?: number
+          observacoes?: string | null
+          offset_custo_ctp?: number | null
+          offset_custo_hora?: number | null
+          offset_custo_papel?: number | null
+          offset_tempo_rodagem?: number | null
+          offset_tempo_setup?: number | null
+          offset_tiragem?: number | null
+          preco_venda?: number
+          status?: string
+          tenant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "smart_quotes_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
@@ -1835,6 +2522,129 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "substratos_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      task_checklist_items: {
+        Row: {
+          concluido: boolean
+          created_at: string
+          id: string
+          ordem: number
+          task_id: string
+          titulo: string
+        }
+        Insert: {
+          concluido?: boolean
+          created_at?: string
+          id?: string
+          ordem?: number
+          task_id: string
+          titulo: string
+        }
+        Update: {
+          concluido?: boolean
+          created_at?: string
+          id?: string
+          ordem?: number
+          task_id?: string
+          titulo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_checklist_items_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tasks: {
+        Row: {
+          alarme_ativo: boolean
+          alarme_minutos: number | null
+          atribuido_para: string | null
+          atribuido_por: string | null
+          categoria: string
+          concluido_em: string | null
+          created_at: string
+          criado_por: string | null
+          data_vencimento: string | null
+          descricao: string | null
+          hora_vencimento: string | null
+          id: string
+          orcamento_id: string | null
+          pedido_id: string | null
+          prioridade: string
+          status: string
+          tenant_id: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          alarme_ativo?: boolean
+          alarme_minutos?: number | null
+          atribuido_para?: string | null
+          atribuido_por?: string | null
+          categoria?: string
+          concluido_em?: string | null
+          created_at?: string
+          criado_por?: string | null
+          data_vencimento?: string | null
+          descricao?: string | null
+          hora_vencimento?: string | null
+          id?: string
+          orcamento_id?: string | null
+          pedido_id?: string | null
+          prioridade?: string
+          status?: string
+          tenant_id: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          alarme_ativo?: boolean
+          alarme_minutos?: number | null
+          atribuido_para?: string | null
+          atribuido_por?: string | null
+          categoria?: string
+          concluido_em?: string | null
+          created_at?: string
+          criado_por?: string | null
+          data_vencimento?: string | null
+          descricao?: string | null
+          hora_vencimento?: string | null
+          id?: string
+          orcamento_id?: string | null
+          pedido_id?: string | null
+          prioridade?: string
+          status?: string
+          tenant_id?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_orcamento_id_fkey"
+            columns: ["orcamento_id"]
+            isOneToOne: false
+            referencedRelation: "erp_orcamentos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_pedido_id_fkey"
+            columns: ["pedido_id"]
+            isOneToOne: false
+            referencedRelation: "erp_pedidos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
