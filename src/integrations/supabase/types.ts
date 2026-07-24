@@ -2170,6 +2170,7 @@ export type Database = {
         Row: {
           assunto: string | null
           canal: string
+          chave_idempotente: string | null
           cliente_id: string | null
           contexto: string | null
           created_at: string
@@ -2186,6 +2187,7 @@ export type Database = {
         Insert: {
           assunto?: string | null
           canal?: string
+          chave_idempotente?: string | null
           cliente_id?: string | null
           contexto?: string | null
           created_at?: string
@@ -2202,6 +2204,7 @@ export type Database = {
         Update: {
           assunto?: string | null
           canal?: string
+          chave_idempotente?: string | null
           cliente_id?: string | null
           contexto?: string | null
           created_at?: string
