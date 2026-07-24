@@ -14,7 +14,224 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      insumos_precos: {
+        Row: {
+          created_at: string
+          custo_base: number
+          id: string
+          markup_padrao: number
+          nome_insumo: string
+          tenant_id: string
+          tipo_modulo: string
+        }
+        Insert: {
+          created_at?: string
+          custo_base?: number
+          id?: string
+          markup_padrao?: number
+          nome_insumo: string
+          tenant_id: string
+          tipo_modulo: string
+        }
+        Update: {
+          created_at?: string
+          custo_base?: number
+          id?: string
+          markup_padrao?: number
+          nome_insumo?: string
+          tenant_id?: string
+          tipo_modulo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "insumos_precos_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      module_config: {
+        Row: {
+          has_crm_advanced: boolean
+          has_digital: boolean
+          has_offset: boolean
+          has_visual: boolean
+          id: string
+          tenant_id: string
+        }
+        Insert: {
+          has_crm_advanced?: boolean
+          has_digital?: boolean
+          has_offset?: boolean
+          has_visual?: boolean
+          id?: string
+          tenant_id: string
+        }
+        Update: {
+          has_crm_advanced?: boolean
+          has_digital?: boolean
+          has_offset?: boolean
+          has_visual?: boolean
+          id?: string
+          tenant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "module_config_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: true
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      planos: {
+        Row: {
+          created_at: string
+          has_crm_advanced: boolean
+          has_digital: boolean
+          has_offset: boolean
+          has_visual: boolean
+          id: string
+          nome: string
+          valor: number
+        }
+        Insert: {
+          created_at?: string
+          has_crm_advanced?: boolean
+          has_digital?: boolean
+          has_offset?: boolean
+          has_visual?: boolean
+          id?: string
+          nome: string
+          valor?: number
+        }
+        Update: {
+          created_at?: string
+          has_crm_advanced?: boolean
+          has_digital?: boolean
+          has_offset?: boolean
+          has_visual?: boolean
+          id?: string
+          nome?: string
+          valor?: number
+        }
+        Relationships: []
+      }
+      produtos: {
+        Row: {
+          ativo: boolean
+          created_at: string
+          custo_acabamento: number | null
+          custo_chapa: number | null
+          custo_clique: number | null
+          custo_estrutura: number | null
+          custo_m2: number | null
+          custo_milheiro: number | null
+          custo_setup: number | null
+          descricao: string | null
+          escala_minima: number | null
+          id: string
+          markup: number
+          nome: string
+          preco_minimo: number
+          substrato: string | null
+          tenant_id: string
+          tipo_modulo: string
+        }
+        Insert: {
+          ativo?: boolean
+          created_at?: string
+          custo_acabamento?: number | null
+          custo_chapa?: number | null
+          custo_clique?: number | null
+          custo_estrutura?: number | null
+          custo_m2?: number | null
+          custo_milheiro?: number | null
+          custo_setup?: number | null
+          descricao?: string | null
+          escala_minima?: number | null
+          id?: string
+          markup?: number
+          nome: string
+          preco_minimo?: number
+          substrato?: string | null
+          tenant_id: string
+          tipo_modulo: string
+        }
+        Update: {
+          ativo?: boolean
+          created_at?: string
+          custo_acabamento?: number | null
+          custo_chapa?: number | null
+          custo_clique?: number | null
+          custo_estrutura?: number | null
+          custo_m2?: number | null
+          custo_milheiro?: number | null
+          custo_setup?: number | null
+          descricao?: string | null
+          escala_minima?: number | null
+          id?: string
+          markup?: number
+          nome?: string
+          preco_minimo?: number
+          substrato?: string | null
+          tenant_id?: string
+          tipo_modulo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "produtos_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tenants: {
+        Row: {
+          created_at: string
+          dominio: string | null
+          gmv_mes: number
+          id: string
+          nome_grafica: string
+          pedidos_mes: number
+          plano_id: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          dominio?: string | null
+          gmv_mes?: number
+          id?: string
+          nome_grafica: string
+          pedidos_mes?: number
+          plano_id?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          dominio?: string | null
+          gmv_mes?: number
+          id?: string
+          nome_grafica?: string
+          pedidos_mes?: number
+          plano_id?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tenants_plano_id_fkey"
+            columns: ["plano_id"]
+            isOneToOne: false
+            referencedRelation: "planos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
