@@ -2876,6 +2876,7 @@ export type Database = {
         Returns: boolean
       }
       is_approved: { Args: { _user_id: string }; Returns: boolean }
+      nextval_pdv_os: { Args: never; Returns: number }
     }
     Enums: {
       app_role: "superadmin" | "operador"
