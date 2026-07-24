@@ -2102,6 +2102,7 @@ export type Database = {
           forma_pagamento: string
           id: string
           itens: Json
+          numero_venda: number
           subtotal: number
           tenant_id: string
           total: number
@@ -2115,6 +2116,7 @@ export type Database = {
           forma_pagamento: string
           id?: string
           itens?: Json
+          numero_venda?: number
           subtotal?: number
           tenant_id: string
           total?: number
@@ -2128,6 +2130,7 @@ export type Database = {
           forma_pagamento?: string
           id?: string
           itens?: Json
+          numero_venda?: number
           subtotal?: number
           tenant_id?: string
           total?: number
@@ -2475,6 +2478,57 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "profiles_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recebimentos_parciais: {
+        Row: {
+          conta_receber_id: string
+          created_at: string
+          data_recebimento: string
+          forma_pagamento: string | null
+          id: string
+          observacoes: string | null
+          registrado_por: string | null
+          tenant_id: string
+          valor: number
+        }
+        Insert: {
+          conta_receber_id: string
+          created_at?: string
+          data_recebimento?: string
+          forma_pagamento?: string | null
+          id?: string
+          observacoes?: string | null
+          registrado_por?: string | null
+          tenant_id: string
+          valor?: number
+        }
+        Update: {
+          conta_receber_id?: string
+          created_at?: string
+          data_recebimento?: string
+          forma_pagamento?: string | null
+          id?: string
+          observacoes?: string | null
+          registrado_por?: string | null
+          tenant_id?: string
+          valor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recebimentos_parciais_conta_receber_id_fkey"
+            columns: ["conta_receber_id"]
+            isOneToOne: false
+            referencedRelation: "contas_receber"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recebimentos_parciais_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
