@@ -1568,6 +1568,47 @@ export type Database = {
           },
         ]
       }
+      formas_pagamento: {
+        Row: {
+          ativo: boolean
+          created_at: string
+          icone: string | null
+          id: string
+          nome: string
+          ordem: number
+          tenant_id: string
+          tipo: string
+        }
+        Insert: {
+          ativo?: boolean
+          created_at?: string
+          icone?: string | null
+          id?: string
+          nome: string
+          ordem?: number
+          tenant_id: string
+          tipo?: string
+        }
+        Update: {
+          ativo?: boolean
+          created_at?: string
+          icone?: string | null
+          id?: string
+          nome?: string
+          ordem?: number
+          tenant_id?: string
+          tipo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "formas_pagamento_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       fornecedores: {
         Row: {
           ativo: boolean
@@ -2045,6 +2086,63 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "papeis_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pdv_vendas: {
+        Row: {
+          cashback_usado: number
+          cliente_id: string | null
+          created_at: string
+          desconto: number
+          forma_pagamento: string
+          id: string
+          itens: Json
+          subtotal: number
+          tenant_id: string
+          total: number
+          usuario_id: string | null
+        }
+        Insert: {
+          cashback_usado?: number
+          cliente_id?: string | null
+          created_at?: string
+          desconto?: number
+          forma_pagamento: string
+          id?: string
+          itens?: Json
+          subtotal?: number
+          tenant_id: string
+          total?: number
+          usuario_id?: string | null
+        }
+        Update: {
+          cashback_usado?: number
+          cliente_id?: string | null
+          created_at?: string
+          desconto?: number
+          forma_pagamento?: string
+          id?: string
+          itens?: Json
+          subtotal?: number
+          tenant_id?: string
+          total?: number
+          usuario_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pdv_vendas_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pdv_vendas_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
