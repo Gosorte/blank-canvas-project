@@ -1110,6 +1110,7 @@ export type Database = {
           email: string
           id: string
           nome: string
+          tenant_id: string | null
         }
         Insert: {
           aprovado?: boolean
@@ -1118,6 +1119,7 @@ export type Database = {
           email?: string
           id: string
           nome?: string
+          tenant_id?: string | null
         }
         Update: {
           aprovado?: boolean
@@ -1126,8 +1128,17 @@ export type Database = {
           email?: string
           id?: string
           nome?: string
+          tenant_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       substratos: {
         Row: {
