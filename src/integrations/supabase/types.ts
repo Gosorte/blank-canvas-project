@@ -1528,6 +1528,7 @@ export type Database = {
           referencia_id: string | null
           tenant_id: string
           tipo: string
+          valor_total: number
         }
         Insert: {
           created_at?: string
@@ -1539,6 +1540,7 @@ export type Database = {
           referencia_id?: string | null
           tenant_id: string
           tipo: string
+          valor_total?: number
         }
         Update: {
           created_at?: string
@@ -1550,6 +1552,7 @@ export type Database = {
           referencia_id?: string | null
           tenant_id?: string
           tipo?: string
+          valor_total?: number
         }
         Relationships: [
           {
@@ -2093,6 +2096,65 @@ export type Database = {
           },
         ]
       }
+      pdv_caixa: {
+        Row: {
+          aberto_em: string
+          aberto_por: string
+          created_at: string
+          fechado_em: string | null
+          fechado_por: string | null
+          id: string
+          observacoes_abertura: string | null
+          observacoes_fechamento: string | null
+          status: string
+          tenant_id: string
+          total_recebido: number | null
+          total_vendas: number | null
+          valor_abertura: number
+          valor_fechamento: number | null
+        }
+        Insert: {
+          aberto_em?: string
+          aberto_por: string
+          created_at?: string
+          fechado_em?: string | null
+          fechado_por?: string | null
+          id?: string
+          observacoes_abertura?: string | null
+          observacoes_fechamento?: string | null
+          status?: string
+          tenant_id: string
+          total_recebido?: number | null
+          total_vendas?: number | null
+          valor_abertura?: number
+          valor_fechamento?: number | null
+        }
+        Update: {
+          aberto_em?: string
+          aberto_por?: string
+          created_at?: string
+          fechado_em?: string | null
+          fechado_por?: string | null
+          id?: string
+          observacoes_abertura?: string | null
+          observacoes_fechamento?: string | null
+          status?: string
+          tenant_id?: string
+          total_recebido?: number | null
+          total_vendas?: number | null
+          valor_abertura?: number
+          valor_fechamento?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pdv_caixa_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       pdv_vendas: {
         Row: {
           cashback_usado: number
@@ -2288,6 +2350,7 @@ export type Database = {
         Row: {
           area_minima_m2: number | null
           ativo: boolean
+          bloquear_sem_estoque: boolean
           cores_frente: number | null
           cores_verso: number | null
           created_at: string
@@ -2301,6 +2364,7 @@ export type Database = {
           descricao: string | null
           dpi: number | null
           escala_minima: number | null
+          estoque_id: string | null
           id: string
           markup: number
           nome: string
@@ -2315,6 +2379,7 @@ export type Database = {
         Insert: {
           area_minima_m2?: number | null
           ativo?: boolean
+          bloquear_sem_estoque?: boolean
           cores_frente?: number | null
           cores_verso?: number | null
           created_at?: string
@@ -2328,6 +2393,7 @@ export type Database = {
           descricao?: string | null
           dpi?: number | null
           escala_minima?: number | null
+          estoque_id?: string | null
           id?: string
           markup?: number
           nome: string
@@ -2342,6 +2408,7 @@ export type Database = {
         Update: {
           area_minima_m2?: number | null
           ativo?: boolean
+          bloquear_sem_estoque?: boolean
           cores_frente?: number | null
           cores_verso?: number | null
           created_at?: string
@@ -2355,6 +2422,7 @@ export type Database = {
           descricao?: string | null
           dpi?: number | null
           escala_minima?: number | null
+          estoque_id?: string | null
           id?: string
           markup?: number
           nome?: string
@@ -2367,6 +2435,13 @@ export type Database = {
           tipo_modulo?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "produtos_estoque_id_fkey"
+            columns: ["estoque_id"]
+            isOneToOne: false
+            referencedRelation: "estoque"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "produtos_papel_id_fkey"
             columns: ["papel_id"]
