@@ -1715,6 +1715,60 @@ export type Database = {
           },
         ]
       }
+      lgpd_consentimentos: {
+        Row: {
+          aceito: boolean
+          cliente_id: string | null
+          created_at: string
+          id: string
+          ip_address: string | null
+          revogado_em: string | null
+          session_id: string | null
+          tenant_id: string
+          tipo: string
+          user_agent: string | null
+        }
+        Insert: {
+          aceito?: boolean
+          cliente_id?: string | null
+          created_at?: string
+          id?: string
+          ip_address?: string | null
+          revogado_em?: string | null
+          session_id?: string | null
+          tenant_id: string
+          tipo?: string
+          user_agent?: string | null
+        }
+        Update: {
+          aceito?: boolean
+          cliente_id?: string | null
+          created_at?: string
+          id?: string
+          ip_address?: string | null
+          revogado_em?: string | null
+          session_id?: string | null
+          tenant_id?: string
+          tipo?: string
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lgpd_consentimentos_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lgpd_consentimentos_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       loja_pedido_itens: {
         Row: {
           arquivo_url: string | null
@@ -2881,34 +2935,79 @@ export type Database = {
       }
       tenants: {
         Row: {
+          cep: string | null
+          cidade: string | null
+          cnpj: string | null
+          cor_primaria: string | null
+          cor_secundaria: string | null
           created_at: string
+          descricao: string | null
           dominio: string | null
+          email: string | null
+          endereco: string | null
+          estado: string | null
           gmv_mes: number
           id: string
+          logo_url: string | null
           nome_grafica: string
+          notif_email_orcamento: boolean
+          notif_email_pedido: boolean
+          notif_whatsapp_status: boolean
           pedidos_mes: number
           plano_id: string | null
           status: string
+          telefone: string | null
+          updated_at: string
         }
         Insert: {
+          cep?: string | null
+          cidade?: string | null
+          cnpj?: string | null
+          cor_primaria?: string | null
+          cor_secundaria?: string | null
           created_at?: string
+          descricao?: string | null
           dominio?: string | null
+          email?: string | null
+          endereco?: string | null
+          estado?: string | null
           gmv_mes?: number
           id?: string
+          logo_url?: string | null
           nome_grafica: string
+          notif_email_orcamento?: boolean
+          notif_email_pedido?: boolean
+          notif_whatsapp_status?: boolean
           pedidos_mes?: number
           plano_id?: string | null
           status?: string
+          telefone?: string | null
+          updated_at?: string
         }
         Update: {
+          cep?: string | null
+          cidade?: string | null
+          cnpj?: string | null
+          cor_primaria?: string | null
+          cor_secundaria?: string | null
           created_at?: string
+          descricao?: string | null
           dominio?: string | null
+          email?: string | null
+          endereco?: string | null
+          estado?: string | null
           gmv_mes?: number
           id?: string
+          logo_url?: string | null
           nome_grafica?: string
+          notif_email_orcamento?: boolean
+          notif_email_pedido?: boolean
+          notif_whatsapp_status?: boolean
           pedidos_mes?: number
           plano_id?: string | null
           status?: string
+          telefone?: string | null
+          updated_at?: string
         }
         Relationships: [
           {
