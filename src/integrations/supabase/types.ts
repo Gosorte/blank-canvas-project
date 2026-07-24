@@ -3053,7 +3053,7 @@ export type Database = {
       nextval_pdv_os: { Args: never; Returns: number }
     }
     Enums: {
-      app_role: "superadmin" | "operador"
+      app_role: "superadmin" | "operador" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -3181,7 +3181,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["superadmin", "operador"],
+      app_role: ["superadmin", "operador", "admin"],
     },
   },
 } as const
