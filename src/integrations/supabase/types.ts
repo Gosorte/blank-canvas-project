@@ -164,6 +164,7 @@ export type Database = {
           auth_user_id: string | null
           cep: string | null
           cidade: string | null
+          contato_nome: string | null
           cpf_cnpj: string | null
           created_at: string
           email: string | null
@@ -172,6 +173,10 @@ export type Database = {
           id: string
           nome: string
           observacoes: string | null
+          origem: string | null
+          razao_social: string | null
+          roles: string[]
+          segmento: string | null
           telefone: string | null
           tenant_id: string
           tipo_pessoa: string
@@ -182,6 +187,7 @@ export type Database = {
           auth_user_id?: string | null
           cep?: string | null
           cidade?: string | null
+          contato_nome?: string | null
           cpf_cnpj?: string | null
           created_at?: string
           email?: string | null
@@ -190,6 +196,10 @@ export type Database = {
           id?: string
           nome: string
           observacoes?: string | null
+          origem?: string | null
+          razao_social?: string | null
+          roles?: string[]
+          segmento?: string | null
           telefone?: string | null
           tenant_id: string
           tipo_pessoa?: string
@@ -200,6 +210,7 @@ export type Database = {
           auth_user_id?: string | null
           cep?: string | null
           cidade?: string | null
+          contato_nome?: string | null
           cpf_cnpj?: string | null
           created_at?: string
           email?: string | null
@@ -208,6 +219,10 @@ export type Database = {
           id?: string
           nome?: string
           observacoes?: string | null
+          origem?: string | null
+          razao_social?: string | null
+          roles?: string[]
+          segmento?: string | null
           telefone?: string | null
           tenant_id?: string
           tipo_pessoa?: string
@@ -343,6 +358,67 @@ export type Database = {
           },
           {
             foreignKeyName: "contas_receber_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      credit_transactions: {
+        Row: {
+          cliente_id: string
+          created_at: string
+          credit_account_id: string
+          descricao: string | null
+          id: string
+          saldo_apos: number
+          tenant_id: string
+          tipo_transacao: string
+          usuario_id: string | null
+          valor: number
+        }
+        Insert: {
+          cliente_id: string
+          created_at?: string
+          credit_account_id: string
+          descricao?: string | null
+          id?: string
+          saldo_apos?: number
+          tenant_id: string
+          tipo_transacao?: string
+          usuario_id?: string | null
+          valor?: number
+        }
+        Update: {
+          cliente_id?: string
+          created_at?: string
+          credit_account_id?: string
+          descricao?: string | null
+          id?: string
+          saldo_apos?: number
+          tenant_id?: string
+          tipo_transacao?: string
+          usuario_id?: string | null
+          valor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "credit_transactions_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "credit_transactions_credit_account_id_fkey"
+            columns: ["credit_account_id"]
+            isOneToOne: false
+            referencedRelation: "customer_credits"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "credit_transactions_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
@@ -2706,6 +2782,50 @@ export type Database = {
           },
           {
             foreignKeyName: "recebimentos_parciais_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recommendation_rules: {
+        Row: {
+          ativo: boolean
+          created_at: string
+          id: string
+          prioridade: number
+          produto_origem: string | null
+          produto_sugerido: string
+          segmento: string | null
+          tenant_id: string
+          tipo_regra: string
+        }
+        Insert: {
+          ativo?: boolean
+          created_at?: string
+          id?: string
+          prioridade?: number
+          produto_origem?: string | null
+          produto_sugerido: string
+          segmento?: string | null
+          tenant_id: string
+          tipo_regra?: string
+        }
+        Update: {
+          ativo?: boolean
+          created_at?: string
+          id?: string
+          prioridade?: number
+          produto_origem?: string | null
+          produto_sugerido?: string
+          segmento?: string | null
+          tenant_id?: string
+          tipo_regra?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recommendation_rules_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
