@@ -1000,6 +1000,7 @@ export type Database = {
           criado_por: string | null
           desconto_percentual: number
           desconto_valor: number
+          erp_orcamento_id: string | null
           id: string
           numero: number
           observacoes: string | null
@@ -1020,6 +1021,7 @@ export type Database = {
           criado_por?: string | null
           desconto_percentual?: number
           desconto_valor?: number
+          erp_orcamento_id?: string | null
           id?: string
           numero?: number
           observacoes?: string | null
@@ -1040,6 +1042,7 @@ export type Database = {
           criado_por?: string | null
           desconto_percentual?: number
           desconto_valor?: number
+          erp_orcamento_id?: string | null
           id?: string
           numero?: number
           observacoes?: string | null
@@ -1071,6 +1074,13 @@ export type Database = {
             columns: ["conversa_id"]
             isOneToOne: false
             referencedRelation: "crm_conversas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_orcamentos_erp_orcamento_id_fkey"
+            columns: ["erp_orcamento_id"]
+            isOneToOne: false
+            referencedRelation: "erp_orcamentos"
             referencedColumns: ["id"]
           },
           {
@@ -1193,30 +1203,48 @@ export type Database = {
       }
       customer_credits: {
         Row: {
+          cashback_balance: number
+          cashback_percent: number
+          cashback_release_days: number
           cliente_id: string
           created_at: string
+          credit_limit: number
+          current_balance: number
           desconto_max_percentual: number
           id: string
+          is_vip: boolean
           saldo_cashback: number
           tenant_id: string
           total_creditos_usados: number
           updated_at: string
         }
         Insert: {
+          cashback_balance?: number
+          cashback_percent?: number
+          cashback_release_days?: number
           cliente_id: string
           created_at?: string
+          credit_limit?: number
+          current_balance?: number
           desconto_max_percentual?: number
           id?: string
+          is_vip?: boolean
           saldo_cashback?: number
           tenant_id: string
           total_creditos_usados?: number
           updated_at?: string
         }
         Update: {
+          cashback_balance?: number
+          cashback_percent?: number
+          cashback_release_days?: number
           cliente_id?: string
           created_at?: string
+          credit_limit?: number
+          current_balance?: number
           desconto_max_percentual?: number
           id?: string
+          is_vip?: boolean
           saldo_cashback?: number
           tenant_id?: string
           total_creditos_usados?: number
@@ -1379,6 +1407,7 @@ export type Database = {
           contato_telefone: string | null
           created_at: string
           criado_por: string | null
+          crm_orcamento_id: string | null
           data_entrega: string | null
           forma_pagamento: string | null
           hora_entrega: string | null
@@ -1404,6 +1433,7 @@ export type Database = {
           contato_telefone?: string | null
           created_at?: string
           criado_por?: string | null
+          crm_orcamento_id?: string | null
           data_entrega?: string | null
           forma_pagamento?: string | null
           hora_entrega?: string | null
@@ -1429,6 +1459,7 @@ export type Database = {
           contato_telefone?: string | null
           created_at?: string
           criado_por?: string | null
+          crm_orcamento_id?: string | null
           data_entrega?: string | null
           forma_pagamento?: string | null
           hora_entrega?: string | null
@@ -1454,6 +1485,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "erp_orcamentos_crm_orcamento_id_fkey"
+            columns: ["crm_orcamento_id"]
+            isOneToOne: false
+            referencedRelation: "crm_orcamentos"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "erp_orcamentos_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
@@ -1472,6 +1510,7 @@ export type Database = {
           contato_telefone: string | null
           created_at: string
           criado_por: string | null
+          crm_orcamento_id: string | null
           data_entrega: string | null
           forma_pagamento: string | null
           hora_entrega: string | null
@@ -1498,6 +1537,7 @@ export type Database = {
           contato_telefone?: string | null
           created_at?: string
           criado_por?: string | null
+          crm_orcamento_id?: string | null
           data_entrega?: string | null
           forma_pagamento?: string | null
           hora_entrega?: string | null
@@ -1524,6 +1564,7 @@ export type Database = {
           contato_telefone?: string | null
           created_at?: string
           criado_por?: string | null
+          crm_orcamento_id?: string | null
           data_entrega?: string | null
           forma_pagamento?: string | null
           hora_entrega?: string | null
@@ -1547,6 +1588,13 @@ export type Database = {
             columns: ["cliente_id"]
             isOneToOne: false
             referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "erp_pedidos_crm_orcamento_id_fkey"
+            columns: ["crm_orcamento_id"]
+            isOneToOne: false
+            referencedRelation: "crm_orcamentos"
             referencedColumns: ["id"]
           },
           {
@@ -1887,6 +1935,7 @@ export type Database = {
         Row: {
           arquivo_url: string | null
           created_at: string
+          crm_arquivo_id: string | null
           especificacoes: Json | null
           id: string
           pedido_id: string
@@ -1900,6 +1949,7 @@ export type Database = {
         Insert: {
           arquivo_url?: string | null
           created_at?: string
+          crm_arquivo_id?: string | null
           especificacoes?: Json | null
           id?: string
           pedido_id: string
@@ -1913,6 +1963,7 @@ export type Database = {
         Update: {
           arquivo_url?: string | null
           created_at?: string
+          crm_arquivo_id?: string | null
           especificacoes?: Json | null
           id?: string
           pedido_id?: string
@@ -1924,6 +1975,13 @@ export type Database = {
           valor_unitario?: number
         }
         Relationships: [
+          {
+            foreignKeyName: "loja_pedido_itens_crm_arquivo_id_fkey"
+            columns: ["crm_arquivo_id"]
+            isOneToOne: false
+            referencedRelation: "crm_arquivos"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "loja_pedido_itens_pedido_id_fkey"
             columns: ["pedido_id"]
@@ -1944,6 +2002,7 @@ export type Database = {
         Row: {
           cliente_id: string | null
           created_at: string
+          crm_conversa_id: string | null
           forma_pagamento: string | null
           id: string
           numero_pedido: number
@@ -1957,6 +2016,7 @@ export type Database = {
         Insert: {
           cliente_id?: string | null
           created_at?: string
+          crm_conversa_id?: string | null
           forma_pagamento?: string | null
           id?: string
           numero_pedido?: number
@@ -1970,6 +2030,7 @@ export type Database = {
         Update: {
           cliente_id?: string | null
           created_at?: string
+          crm_conversa_id?: string | null
           forma_pagamento?: string | null
           id?: string
           numero_pedido?: number
@@ -1986,6 +2047,13 @@ export type Database = {
             columns: ["cliente_id"]
             isOneToOne: false
             referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "loja_pedidos_crm_conversa_id_fkey"
+            columns: ["crm_conversa_id"]
+            isOneToOne: false
+            referencedRelation: "crm_conversas"
             referencedColumns: ["id"]
           },
           {
@@ -2098,6 +2166,72 @@ export type Database = {
           },
         ]
       }
+      notificacoes_pendentes: {
+        Row: {
+          assunto: string | null
+          canal: string
+          cliente_id: string | null
+          contexto: string | null
+          created_at: string
+          destinatario: string
+          enviado_em: string | null
+          erro: string | null
+          id: string
+          mensagem: string
+          referencia_id: string | null
+          status: string
+          tenant_id: string
+          tentativas: number
+        }
+        Insert: {
+          assunto?: string | null
+          canal?: string
+          cliente_id?: string | null
+          contexto?: string | null
+          created_at?: string
+          destinatario: string
+          enviado_em?: string | null
+          erro?: string | null
+          id?: string
+          mensagem: string
+          referencia_id?: string | null
+          status?: string
+          tenant_id: string
+          tentativas?: number
+        }
+        Update: {
+          assunto?: string | null
+          canal?: string
+          cliente_id?: string | null
+          contexto?: string | null
+          created_at?: string
+          destinatario?: string
+          enviado_em?: string | null
+          erro?: string | null
+          id?: string
+          mensagem?: string
+          referencia_id?: string | null
+          status?: string
+          tenant_id?: string
+          tentativas?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notificacoes_pendentes_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notificacoes_pendentes_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       op_historico: {
         Row: {
           created_at: string
@@ -2141,8 +2275,10 @@ export type Database = {
           data_entrega: string | null
           especificacoes: Json | null
           id: string
+          loja_pedido_id: string | null
           numero_op: number
           observacoes: string | null
+          pedido_id: string | null
           prioridade: string
           produto_nome: string
           quantidade: number
@@ -2159,8 +2295,10 @@ export type Database = {
           data_entrega?: string | null
           especificacoes?: Json | null
           id?: string
+          loja_pedido_id?: string | null
           numero_op?: number
           observacoes?: string | null
+          pedido_id?: string | null
           prioridade?: string
           produto_nome: string
           quantidade?: number
@@ -2177,8 +2315,10 @@ export type Database = {
           data_entrega?: string | null
           especificacoes?: Json | null
           id?: string
+          loja_pedido_id?: string | null
           numero_op?: number
           observacoes?: string | null
+          pedido_id?: string | null
           prioridade?: string
           produto_nome?: string
           quantidade?: number
@@ -2194,6 +2334,20 @@ export type Database = {
             columns: ["cliente_id"]
             isOneToOne: false
             referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ordens_producao_loja_pedido_id_fkey"
+            columns: ["loja_pedido_id"]
+            isOneToOne: false
+            referencedRelation: "loja_pedidos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ordens_producao_pedido_id_fkey"
+            columns: ["pedido_id"]
+            isOneToOne: false
+            referencedRelation: "erp_pedidos"
             referencedColumns: ["id"]
           },
           {
@@ -2514,10 +2668,63 @@ export type Database = {
           },
         ]
       }
+      produto_estoque_link: {
+        Row: {
+          bloquear_se_zerado: boolean
+          created_at: string
+          estoque_id: string
+          id: string
+          produto_id: string
+          quantidade_por_unidade: number
+          tenant_id: string
+        }
+        Insert: {
+          bloquear_se_zerado?: boolean
+          created_at?: string
+          estoque_id: string
+          id?: string
+          produto_id: string
+          quantidade_por_unidade?: number
+          tenant_id: string
+        }
+        Update: {
+          bloquear_se_zerado?: boolean
+          created_at?: string
+          estoque_id?: string
+          id?: string
+          produto_id?: string
+          quantidade_por_unidade?: number
+          tenant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "produto_estoque_link_estoque_id_fkey"
+            columns: ["estoque_id"]
+            isOneToOne: false
+            referencedRelation: "estoque"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "produto_estoque_link_produto_id_fkey"
+            columns: ["produto_id"]
+            isOneToOne: false
+            referencedRelation: "produtos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "produto_estoque_link_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       produtos: {
         Row: {
           area_minima_m2: number | null
           ativo: boolean
+          bloqueado_por_estoque: boolean
           bloquear_sem_estoque: boolean
           cores_frente: number | null
           cores_verso: number | null
@@ -2530,6 +2737,7 @@ export type Database = {
           custo_milheiro: number | null
           custo_setup: number | null
           descricao: string | null
+          disponivel_loja: boolean
           dpi: number | null
           escala_minima: number | null
           estoque_id: string | null
@@ -2547,6 +2755,7 @@ export type Database = {
         Insert: {
           area_minima_m2?: number | null
           ativo?: boolean
+          bloqueado_por_estoque?: boolean
           bloquear_sem_estoque?: boolean
           cores_frente?: number | null
           cores_verso?: number | null
@@ -2559,6 +2768,7 @@ export type Database = {
           custo_milheiro?: number | null
           custo_setup?: number | null
           descricao?: string | null
+          disponivel_loja?: boolean
           dpi?: number | null
           escala_minima?: number | null
           estoque_id?: string | null
@@ -2576,6 +2786,7 @@ export type Database = {
         Update: {
           area_minima_m2?: number | null
           ativo?: boolean
+          bloqueado_por_estoque?: boolean
           bloquear_sem_estoque?: boolean
           cores_frente?: number | null
           cores_verso?: number | null
@@ -2588,6 +2799,7 @@ export type Database = {
           custo_milheiro?: number | null
           custo_setup?: number | null
           descricao?: string | null
+          disponivel_loja?: boolean
           dpi?: number | null
           escala_minima?: number | null
           estoque_id?: string | null
